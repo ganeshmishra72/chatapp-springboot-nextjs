@@ -1,6 +1,6 @@
 package com.rdmishra.backend_chat.entity;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,11 +14,11 @@ public class Message {
     public Message(String sender, String content) {
         this.sender = sender;
         this.content = content;
-        this.timeStamp = LocalDateTime.now();
+        this.timeStamp = Instant.now();
     }
 
     private String sender; // username of sender
     private String content;
-    private LocalDateTime timeStamp;
+    private Instant timeStamp;
 
 }

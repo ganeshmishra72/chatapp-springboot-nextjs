@@ -6,15 +6,19 @@ import { useFormik } from 'formik';
 import { useCreateRoom, useJoinRoom } from '@/Hooks/CreateRoomHook';
 import RoomStore from '@/store/RoomData';
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { joinChat } from '@/services/CraeteRoomService';
+import Link from 'next/link';
+import { FiInfo } from "react-icons/fi";
 
 const Home = () => {
-  const createRoomData=RoomStore(state=>state.createRoom)
-  const setConneectRoom=RoomStore(state=>state.setConnected)
-  const {mutate}=useCreateRoom()
+
+  const createRoomData = RoomStore(state => state.createRoom)
+  const setConneectRoom = RoomStore(state => state.setConnected)
+
+  const { mutate } = useCreateRoom()
   const { mutate: joinRoom } = useJoinRoom()
-  const navigate=useRouter();
+
+  const navigate = useRouter();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -22,6 +26,7 @@ const Home = () => {
     },
 
     validate: (values) => {
+
       const errors: any = {};
 
       if (!values.name) {
@@ -32,43 +37,77 @@ const Home = () => {
         errors.roomId = "Room ID is required";
       }
 
-      return errors; // IMPORTANT
+      return errors;
     },
 
     onSubmit: (values) => {
+
       mutate(values)
+
       createRoomData({
-        name:values.name,
-        roomId:values.roomId
+        name: values.name,
+        roomId: values.roomId
       })
+
       setConneectRoom(true)
+
       navigate.refresh()
       navigate.replace("/chat")
     }
   });
-   const handelJoinChat=()=>{
-       joinRoom(formik.values.roomId, {
 
-        onSuccess: () => {
+  const handelJoinChat = () => {
 
-            createRoomData({
-                name: formik.values.name,
-                roomId: formik.values.roomId
-            })
+    joinRoom(formik.values.roomId, {
 
-            setConneectRoom(true)
-             navigate.refresh()
-            navigate.replace("/chat")
-        }
+      onSuccess: () => {
+
+        createRoomData({
+          name: formik.values.name,
+          roomId: formik.values.roomId
+        })
+
+        setConneectRoom(true)
+
+        navigate.refresh()
+        navigate.replace("/chat")
+      }
     })
-   }
+  }
+
   return (
-    <div className='min-h-screen bg-linear-to-br from-black via-slate-950 to-gray-900 flex justify-center items-center px-4 overflow-hidden'>
+
+    <div className='min-h-screen bg-gradient-to-br from-black via-slate-950 to-gray-900 flex justify-center items-center px-4 overflow-hidden relative'>
+
+      {/* About Button */}
+      <div className='absolute top-6 right-6 z-20'>
+
+        <Link href="/about">
+
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 0px 20px rgba(59,130,246,0.4)"
+            }}
+            whileTap={{ scale: 0.95 }}
+            className='flex items-center gap-2 bg-white/5 border border-white/10 hover:border-cyan-400/40 text-white px-5 py-2.5 rounded-xl backdrop-blur-xl transition-all cursor-pointer'
+          >
+
+            <FiInfo />
+            About
+
+          </motion.button>
+
+        </Link>
+
+      </div>
 
       {/* Background Blur Effects */}
       <div className='absolute w-72 h-72 bg-blue-500/20 rounded-full blur-3xl top-10 left-10'></div>
+
       <div className='absolute w-72 h-72 bg-purple-500/20 rounded-full blur-3xl bottom-10 right-10'></div>
 
+      {/* Main Card */}
       <motion.div
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -80,6 +119,7 @@ const Home = () => {
 
           {/* Heading */}
           <div className='text-center mb-8'>
+
             <h1 className='text-4xl font-bold text-white'>
               Welcome Back
             </h1>
@@ -87,13 +127,18 @@ const Home = () => {
             <p className='text-gray-400 mt-2 text-sm'>
               Join an existing room or create a new one
             </p>
+
           </div>
 
           {/* Form */}
-          <form className='flex flex-col gap-5' onSubmit={formik.handleSubmit}>
+          <form
+            className='flex flex-col gap-5'
+            onSubmit={formik.handleSubmit}
+          >
 
             {/* Name */}
             <div className='flex flex-col gap-2'>
+
               <label className='text-sm text-gray-300'>
                 Your Name
               </label>
@@ -114,10 +159,12 @@ const Home = () => {
                   </p>
                 )
               }
+
             </div>
 
             {/* Room ID */}
             <div className='flex flex-col gap-2'>
+
               <label className='text-sm text-gray-300'>
                 Room ID
               </label>
@@ -138,6 +185,7 @@ const Home = () => {
                   </p>
                 )
               }
+
             </div>
 
             {/* Buttons */}
@@ -152,9 +200,11 @@ const Home = () => {
                 whileTap={{ scale: 0.95 }}
                 type='button'
                 onClick={handelJoinChat}
-                className='w-full bg-linear-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-xl font-semibold cursor-pointer'
+                className='w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-xl font-semibold cursor-pointer'
               >
+
                 Join Room
+
               </motion.button>
 
               {/* Create Button */}
@@ -165,9 +215,11 @@ const Home = () => {
                 }}
                 whileTap={{ scale: 0.95 }}
                 type='submit'
-                className='w-full bg-linear-to-r from-purple-600 to-pink-500 text-white py-3 rounded-xl font-semibold cursor-pointer'
+                className='w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 rounded-xl font-semibold cursor-pointer'
               >
+
                 Create Room
+
               </motion.button>
 
             </div>
@@ -180,7 +232,9 @@ const Home = () => {
           </p>
 
         </div>
+
       </motion.div>
+
     </div>
   )
 }

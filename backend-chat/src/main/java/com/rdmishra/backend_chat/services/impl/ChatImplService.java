@@ -1,6 +1,6 @@
 package com.rdmishra.backend_chat.services.impl;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class ChatImplService implements ChatServices {
         Message message = new Message();
         message.setContent(request.getContent());
         message.setSender(request.getSender());
-        message.setTimeStamp(LocalDateTime.now());
+        message.setTimeStamp(Instant.now());
 
         if (room == null) {
             throw new RuntimeException("Room Not Found");
