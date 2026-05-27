@@ -1,5 +1,6 @@
 package com.rdmishra.backend_chat.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -10,7 +11,8 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    private final String frontendURL = "http://localhost:3000";
+    @Value("${fronten.url}")
+    private String frontendURL;
 
     // Broker ko configue karne ke liye
     @Override

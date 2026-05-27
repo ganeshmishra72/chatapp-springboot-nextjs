@@ -105,7 +105,7 @@ const ChatRoom = () => {
     if (!roomId) return
 
     const socket = new SockJS(
-      "http://localhost:8080/chat"
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/chat`
     )
 
     const client = new Client({
