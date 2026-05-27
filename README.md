@@ -159,3 +159,47 @@ Server state caching
 Mutations
 
 Async data fetching
+
+---
+
+🛠️ Environment Variables
+
+Frontend .env.local
+
+NEXT_PUBLIC_BASE_URL=http://localhost:8080
+
+Backend application.properties
+
+spring.data.mongodb.uri=YOUR_MONGODB_URI
+
+---
+
+🐳 Docker Support
+
+Backend Docker Build
+
+docker build -t your-dockerhub-username/backend-chat:v1 .
+
+Push Docker Image
+
+docker push your-dockerhub-username/backend-chat:v1
+
+---
+
+🚀 Future Improvements
+
+File sharing
+
+Typing indicator
+
+Online users
+
+Authentication & Authorization
+
+Private messaging
+
+Emoji support
+
+Voice & Video calling
+
+---
