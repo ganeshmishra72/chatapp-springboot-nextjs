@@ -4,16 +4,16 @@ export const timeAgo = (
 
     if (!timestamp) return "Just now";
 
-    const now = new Date();
-    const past = new Date(timestamp);
+    const past = new Date(timestamp).getTime();
+    const now = Date.now();
 
-    if (isNaN(past.getTime())) {
+    const diffInSeconds = Math.floor(
+        (now - past) / 1000
+    );
+
+    if (diffInSeconds < 0) {
         return "Just now";
     }
-
-    const seconds = Math.floor(
-        (now.getTime() - past.getTime()) / 1000
-    );
 
     const intervals = [
         { label: "year", seconds: 31536000 },
@@ -27,7 +27,7 @@ export const timeAgo = (
     for (const interval of intervals) {
 
         const count = Math.floor(
-            seconds / interval.seconds
+            diffInSeconds / interval.seconds
         );
 
         if (count >= 1) {
