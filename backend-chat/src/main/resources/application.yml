@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODBURL:mongodb+srv://rdmishra:XPBPTM6YQEFHXjtI@cluster0.lskjeqt.mongodb.net/chatapp?retryWrites=true&w=majority&appName=Cluster0}
+
+fronten:
+  url: ${FRONTENDURL}
