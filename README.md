@@ -203,3 +203,34 @@ Emoji support
 Voice & Video calling
 
 ---
+
+<img width="1154" height="864" alt="image" src="https://github.com/user-attachments/assets/e146f063-c128-417b-a03e-3b9d61d88d77" />
+
+<img width="1826" height="911" alt="image" src="https://github.com/user-attachments/assets/f08d77dc-036d-4c1a-9b84-f61cf19c7dfb" />
+
+
+
+---
+👨‍💻 Author
+
+Ganesh Mishra
+
+Full Stack Developer
+
+Java + Spring Boot Developer
+
+Next.js Enthusiast
+
+---
+
+⭐ Support
+
+If you like this project:
+
+⭐ Star the repository
+
+🍴 Fork the project
+
+🐛 Report issues
+
+🚀 Contribute improvements
